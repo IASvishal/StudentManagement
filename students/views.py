@@ -204,5 +204,3 @@ class StudentDetailView(LoginRequiredMixin, DetailView):
     template_name = "students/student_detail.html"
     context_object_name = "student"
 
-def test_error(request):
-    raise Exception("Testing 500 page")

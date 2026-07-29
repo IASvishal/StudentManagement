@@ -10,6 +10,4 @@ urlpatterns = [
     path("delete/<int:pk>/", views.StudentDeleteView.as_view(), name="delete_student"),
     path("dashboard/", views.DashboardView.as_view(), name="dashboard"),
     path("students/<int:pk>/", views.StudentDetailView.as_view(), name="student_detail"),
-    path("test500/", views.test_error, name="test500")
-
 ]
