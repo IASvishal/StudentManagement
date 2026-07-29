@@ -1,0 +1,22 @@
+{% extends "students/base.html" %}
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+    <div class="card shadow">
+        <div class="card-body">
+            <h2 class="mb-3">
+                Student Management System
+            </h2>
+            <p>
+                Welcome to Our Django CRUD Project
+            </p>
+            <a class="btn btn-primary" href="{% url 'student_list' %}">View Students</a>
+            {% if perms.students.add_student %}
+                <a class="btn btn-success" href="{% url 'add_student' %}">Add Student</a>
+                <a class="btn btn-success" href="{% url 'dashboard' %}">View Dashboard</a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

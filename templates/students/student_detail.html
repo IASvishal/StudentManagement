@@ -1,0 +1,62 @@
+{% extends 'students/base.html' %}
+{% load static %}
+{% block title %}
+Student Detail
+{% endblock %}
+{% block content %}
+    <div class="container mt-4">
+        <div class="card shadow">
+
+            <div class="card-header">
+                <h3>Student Details</h3>
+            </div>
+
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 text-center">
+                        {% if student.photo %}
+                            <img src="{{ student.photo.url }}" class="img-fluid rounded" width="220">
+                        {% else %}
+                            <img src="{% static 'images/default.jpg' %}" class="img-fluid rounded" width="220">
+                        {% endif %}
+                    </div>
+
+                    <div class="col-md-8">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th>Name</th>
+                                <td>{{ student.name }}</td>
+                            </tr>
+
+                            <tr>
+                                <th>Roll Number</th>
+                                <td>{{ student.roll_number }}</td>
+                            </tr>
+
+                            <tr>
+                                <th>Age</th>
+                                <td>{{ student.age }}</td>
+                            </tr>
+
+                            <tr>
+                                <th>Course</th>
+                                <td>{{ student.course }}</td>
+                            </tr>
+
+                            <tr>
+                                <th>Email</th>
+                                <td>{{ student.email }}</td>
+                            </tr>
+                        </table>
+
+                        <a href="{% url 'student_list' %}" class="btn btn-secondary">Back</a>
+                        {% if perms.students.change_student %}
+                            <a href="{% url 'update_student' student.pk %}" class="btn btn-warning">Edit</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

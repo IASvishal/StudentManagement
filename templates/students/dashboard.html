@@ -1,0 +1,85 @@
+{% extends "students/base.html" %}
+{% block title %}
+DashBoard
+{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Dashboard</h2>
+<div class="row">
+
+    <div class="col-md-4">
+        <div class="card text-center shadow">
+            <div class="card-body">
+                <h5>Total Students</h5>
+                <h1>{{ total_students }}</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center shadow">
+            <div class="card-body">
+                <h5>Total Courses</h5>
+                <h1>{{ total_courses }}</h1>
+            </div>
+        </div>
+    </div>
+    <!-- Chart Card-->
+    <div class="card mt-4">
+        <div class="card-header">
+            Students by Course
+        </div>
+        <div class="card-body">
+            <canvas id="courseChart"></canvas>
+        </div>
+    </div>
+    <div class="card mt-4">
+
+        <div class="card-header">
+            Recent Students
+        </div>
+        <div class="card-body">
+            <ul class="list-group">
+                {% for student in recent_students %}
+                    <li class="list-group-item">
+                        {{ student.name }}
+                        ({{ student.course }})
+                    </li>
+                {% empty %}
+                    <li class="list-group-item">
+                        No Students
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        const labels = [
+        {% for item in course_data %}
+            "{{ item.course }}",
+        {% endfor %}
+        ];
+
+        const data = [
+        {% for item in course_data %}
+            {{ item.total }},
+        {% endfor %}
+        ];
+
+        new Chart(document.getElementById("courseChart"), {
+            type: "bar",
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: "Students",
+                    data: data
+                }]
+            }
+        });
+    </script>
+{% endblock %}

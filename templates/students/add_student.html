@@ -1,0 +1,79 @@
+{% extends "students/base.html" %}
+{% block title %}
+Add Student
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Add Student</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label class="form-label">Name</label>
+            {{ form.name }}
+            {% if form.name.errors %}
+                <div class="text-danger">
+                    {{ form.name.errors }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Roll_Number</label>
+            {{ form.roll_number }}
+            {% if form.roll_number.errors %}
+                <div class="text-danger">
+                    {{ form.roll_number.errors }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Course</label>
+            {{ form.course }}
+            {% if form.course.errors %}
+                <div class="text-danger">
+                    {{ form.course.errors }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Email</label>
+            {{ form.email }}
+            {% if form.email.errors %}
+                <div class="text-danger">
+                    {{ form.email.errors }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Age</label>
+            {{ form.age }}
+            {% if form.age.errors %}
+                <div class="text-danger">
+                    {{ form.age.errors }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="mb-3">
+            <label for="{{ form.photo.id_for_label }}" class="form-label">Photo</label>
+            {{ form.photo }}
+            {% if form.photo.errors %}
+            <div class="text-danger">
+                {{ form.photo.errors }}
+            </div>
+            {% endif %}
+        </div>
+
+
+        <button class="btn btn-success" type="submit">
+            Save Student
+        </button>
+    </form>
+</div>
+{% endblock %}
