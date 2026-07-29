@@ -25,6 +25,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 load_dotenv()
 
+cloudinary.config(
+    cloud_name=os.getenv("CLOUDINARY_CLOUD_NAME"),
+    api_key=os.getenv("CLOUDINARY_API_KEY"),
+    api_secret=os.getenv("CLOUDINARY_API_SECRET"),
+    secure=True,
+)
+
 # -------------------------
 # Security
 # -------------------------
@@ -46,6 +53,9 @@ ALLOWED_HOSTS = os.getenv(
 # -------------------------
 
 INSTALLED_APPS = [
+    'cloudinary',
+    'cloudinary_storage',
+
     "students.apps.StudentsConfig",
     "accounts.apps.AccountsConfig",
 
@@ -155,8 +165,9 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 # Media Files
 # -------------------------
 
-MEDIA_URL = "/media/"
-MEDIA_ROOT = BASE_DIR / "media"
+# MEDIA_URL = "/media/"
+# MEDIA_ROOT = BASE_DIR / "media"
+DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 
 # -------------------------
 # WhiteNoise Storage
@@ -164,7 +175,7 @@ MEDIA_ROOT = BASE_DIR / "media"
 
 STORAGES = {
     "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
     },
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
